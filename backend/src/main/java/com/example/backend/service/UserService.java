@@ -14,7 +14,15 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        System.out.println(userRepository.findAll().toString());
+        System.out.println(userRepository.findAll());
         return userRepository.findAll();
+    }
+
+    public User getUserById(int id) {
+        return userRepository.findById((long) id).orElse(null);
+    }
+
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 }
