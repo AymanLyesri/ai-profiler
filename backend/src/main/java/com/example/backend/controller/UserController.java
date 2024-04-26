@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.Response;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +12,31 @@ import java.util.List;
 class UserController {
 
     @Autowired
-
     private UserService userService;
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public Response getAllUsers() {
         List<User> users = userService.getAllUsers();
         for (User user : users) {
             user.setPassword(null);
         }
-        return userService.getAllUsers();
+        return new Response<>(200, users);
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    public Response getUserById(@PathVariable int id) {
+        return new Response<>(200, userService.getUserById(id));
     }
 
     @PostMapping("/users/create")
     public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+        return userService.saveUser(user);
+    }
+
+    // list histories
+    @GetMapping("/users/{id}/histories")
+    public Response getUserHistories(@PathVariable int id) {
+        User user = userService.getUserById(id);
+        return new Response<>(200, user.getHistories());
     }
 }

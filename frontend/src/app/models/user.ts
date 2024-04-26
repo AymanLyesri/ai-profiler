@@ -1,7 +1,7 @@
 import { Profile } from "./profile";
 import { Recommendation } from "./recommendation";
 
-export class Client
+export class User
 {
     id: number;
     username: string;

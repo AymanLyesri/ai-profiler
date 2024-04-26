@@ -59,6 +59,7 @@ public class User {
         this.histories = histories;
     }
 
+
     public List<Recommendation> getRecommendations() {
         return recommendations;
     }
