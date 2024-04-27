@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit
   onSubmit(): void
   {
     if (this.form.valid) {
-      this.authService.isLoggedIn$.subscribe((isLoggedIn) =>
+      this.authService.login(this.form.value.username, this.form.value.password).subscribe((isLoggedIn) =>
       {
         if (isLoggedIn) {
           //set 1s sleep time
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit
         console.log('User is logged in:', isLoggedIn);
       }
       );
-      this.authService.login(this.form.value.username, this.form.value.password)
+
 
 
     } else {

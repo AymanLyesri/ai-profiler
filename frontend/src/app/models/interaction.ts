@@ -1,5 +1,7 @@
 export class Interaction
 {
-    id: string;
+    id?: string;
     url: string;
+    title: string;
+    time: Date;
 }

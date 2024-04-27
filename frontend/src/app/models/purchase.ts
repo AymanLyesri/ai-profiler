@@ -1,6 +1,6 @@
 export class Purchase
 {
-    id: number;
+    id?: number;
     url: string;
-    description: string;
+    title: string;
 }

@@ -11,11 +11,11 @@ public class History {
     private int id;
     @OneToOne(mappedBy = "history")
     private Topic topic;
-    @OneToMany(mappedBy = "history")
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
     private List<Interaction> interactions;
-    @OneToMany(mappedBy = "history")
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
-    @OneToMany(mappedBy = "history")
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
     private List<Coordinate> coordinates;
     @ManyToOne
     private User user;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription, retry } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, catchError, map, of, retry } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
@@ -17,13 +17,12 @@ export class AuthService
 
   constructor(private http: HttpClient) { }
 
-  // Login method with HTTP request
-  login(username: string, password: string)
+  login(username: string, password: string): Observable<boolean>
   {
     const body = { username: username, password: password };
 
-    return this.http.post<any>(this.URL + 'login', body).subscribe({
-      next: (response) =>
+    return this.http.post<any>(this.URL + 'login', body).pipe(
+      map(response =>
       {
         console.log('Login response:', response);
         if (response.status === 200) {
@@ -31,19 +30,12 @@ export class AuthService
           localStorage.setItem('password', password);
           this.user = response.data;
           console.log('User:', this.user);
-
-          this.isLoggedIn$.next(true);
+          return true;
+        } else {
+          return false;
         }
-        else {
-          this.isLoggedIn$.next(false);
-        }
-      },
-      error: (error) =>
-      {
-        console.error('Login error:', error);
-        this.isLoggedIn$.next(false);
-      }
-    });
+      })
+    );
   }
 
 
@@ -55,8 +47,14 @@ export class AuthService
     const password = localStorage.getItem('password');
 
     // If both are stored, the user is logged in
-    this.login(username, password);
+    this.login(username, password).subscribe(
+      (response) =>
+      {
+        console.log('Is logged in:', response);
 
+        this.isLoggedIn$.next(response);
+      }
+    );
     // Return the observable
     return this.isLoggedIn$.asObservable();
   }

@@ -19,6 +19,10 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
+    public String toString() {
+        return "User{id=" + id + ", username='" + username + "', email='" + email + "', password='" + password + "', histories=" + histories + ", recommendations=" + recommendations + ", profile=" + profile + "}";
+    }
+
     public int getId() {
         return id;
     }

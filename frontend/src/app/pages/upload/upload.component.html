@@ -1,0 +1,17 @@
+<div class="form-group">
+  <form [formGroup]="uploadForm" class="d-flex" (ngSubmit)="onSubmit()">
+    <input
+      type="file"
+      class="form-control"
+      formControlName="fileInput"
+      (change)="onFileSelected($event)"
+    />
+    <button
+      type="submit"
+      class="btn btn-default"
+      [disabled]="!uploadForm.valid"
+    >
+      Upload
+    </button>
+  </form>
+</div>

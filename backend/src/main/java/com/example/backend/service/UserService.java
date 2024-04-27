@@ -23,18 +23,17 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        userRepository.save(user);
-        return user;
+        return userRepository.save(user);
     }
 
     public void addHistoryToUser(User user, History history) {
         // Add the history to the user's list of histories
-        user.getHistories().add(history);
+//        user.getHistories().add(history);
         // Set the user for the history record
         history.setUser(user);
 
         // Save the updated user entity to update the relationship
-        userRepository.save(user);
+//        userRepository.save(user);
 
         // Save the history entity
         historyRepository.save(history);

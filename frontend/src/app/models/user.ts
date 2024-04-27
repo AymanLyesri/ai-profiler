@@ -1,3 +1,4 @@
+import { History } from "./history";
 import { Profile } from "./profile";
 import { Recommendation } from "./recommendation";
 

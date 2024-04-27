@@ -1,10 +1,12 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.History;
+import com.example.backend.model.Response;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,18 +15,24 @@ public class HistoryController {
     @Autowired
     private UserService userService;
 
-    // add history
-    @GetMapping("/history")
-    public void addHistory() {
-        // Add history to database
+    // upload history, accepts user that has an added history and saves it
+    @PostMapping("/history/upload")
+    public Response uploadHistory(@RequestBody UploadRequest request) {
+        // Upload history to database
 
-        User user = new User();
-        user.setId(1);
+        System.out.println("Received User object: " + request.user.toString() + "Received History object: " + request.history.toString());
 
-        History history = new History();
+        User user = userService.getUserById(request.user.getId());
+        History history = request.history;
 
         userService.addHistoryToUser(user, history);
 
+        return new Response(200, "History uploaded successfully");
+    }
+
+    public static class UploadRequest {
+        public User user;
+        public History history;
 
     }
 }
