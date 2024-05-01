@@ -15,6 +15,13 @@ public class Interaction {
     @ManyToOne
     private History history;
 
+    public String toData() {
+        return "Interaction{" +
+                ", url='" + url + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -46,4 +53,9 @@ public class Interaction {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public void setHistory(History history) {
+        this.history = history;
+    }
+
 }

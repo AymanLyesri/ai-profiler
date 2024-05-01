@@ -1,6 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.model.History;
 import com.example.backend.model.User;
 import com.example.backend.repository.HistoryRepository;
 import com.example.backend.repository.UserRepository;
@@ -24,19 +23,6 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepository.save(user);
-    }
-
-    public void addHistoryToUser(User user, History history) {
-        // Add the history to the user's list of histories
-//        user.getHistories().add(history);
-        // Set the user for the history record
-        history.setUser(user);
-
-        // Save the updated user entity to update the relationship
-//        userRepository.save(user);
-
-        // Save the history entity
-        historyRepository.save(history);
     }
 
     public User getUserById(int id) {

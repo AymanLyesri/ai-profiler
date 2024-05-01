@@ -20,6 +20,10 @@ public class History {
     @ManyToOne
     private User user;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }
@@ -58,9 +62,5 @@ public class History {
 
     public void setCoordinates(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
