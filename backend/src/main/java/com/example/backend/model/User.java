@@ -14,13 +14,11 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<History> histories;
-    @OneToMany(mappedBy = "user")
-    private List<Recommendation> recommendations;
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
     public String toString() {
-        return "User{id=" + id + ", username='" + username + "', email='" + email + "', password='" + password + "', histories=" + histories + ", recommendations=" + recommendations + ", profile=" + profile + "}";
+        return "User{id=" + id + ", username='" + username + "', email='" + email + "', password='" + password + "', histories=" + histories + ", profile=" + profile + "}";
     }
 
     public int getId() {
@@ -63,14 +61,6 @@ public class User {
         this.histories = histories;
     }
 
-
-    public List<Recommendation> getRecommendations() {
-        return recommendations;
-    }
-
-    public void setRecommendations(List<Recommendation> recommendations) {
-        this.recommendations = recommendations;
-    }
 
     public Profile getProfile() {
         return profile;

@@ -17,6 +17,8 @@ public class History {
     private List<Purchase> purchases;
     @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
     private List<Coordinate> coordinates;
+    @OneToOne(mappedBy = "history")
+    private Recommendation recommendation;
     @ManyToOne
     private User user;
 

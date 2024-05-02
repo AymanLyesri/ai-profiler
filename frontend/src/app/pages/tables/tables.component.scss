@@ -1,0 +1,6 @@
+.fixed-width {
+  max-width: 200px; /* adjust this value as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

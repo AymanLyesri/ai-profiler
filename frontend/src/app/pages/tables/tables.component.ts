@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Interaction } from 'src/app/models/interaction';
+import { History } from 'src/app/models/history';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tables',
@@ -9,9 +11,13 @@ import { Interaction } from 'src/app/models/interaction';
 export class TablesComponent implements OnInit
 {
 
-  interactions: Interaction[];
+  currentHistory: History;
+  user: User;
 
-  constructor() { }
+  constructor(private authService: AuthService)
+  {
+    this.user = this.authService.user;
+  }
 
   ngOnInit()
   {

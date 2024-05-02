@@ -34,9 +34,8 @@ class UserController {
     }
 
     // list histories
-    @GetMapping("/users/{id}/histories")
-    public Response getUserHistories(@PathVariable int id) {
-        User user = userService.getUserById(id);
+    @GetMapping("/users/histories")
+    public Response getUserHistories(@RequestBody User user) {
         return new Response<>(200, user.getHistories());
     }
 }
