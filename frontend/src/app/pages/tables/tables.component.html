@@ -124,7 +124,7 @@
         <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">Histories</h3>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" style="min-height: 100px">
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
@@ -162,7 +162,9 @@
                 <td>{{ history.interactions.length }}</td>
                 <td>{{ history.purchases.length }}</td>
                 <td>{{ history.coordinates.length }}</td>
-                <td>{{ history.recommendation ? 1 : 0 }}</td>
+                <td>
+                  {{ history.recommendation ? "Generated" : "Not Generated" }}
+                </td>
                 <!-- <td>
                   <span class="badge badge-dot mr-4">
                     <i class="bg-warning"></i> pending
@@ -185,8 +187,12 @@
                     </div>
                   </div>
                 </td> -->
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
+                <td class="text-right" style="z-index: 1100">
+                  <div
+                    ngbDropdown
+                    placement="center-right"
+                    style="z-index: 1100"
+                  >
                     <button
                       class="btn btn-sm btn-icon-only text-light"
                       ngbDropdownToggle
@@ -220,26 +226,60 @@
   <div class="row" *ngIf="currentHistory">
     <div class="col">
       <div class="card shadow">
-        <div class="card-header border-0">
-          <h3 class="mb-0">Interactions</h3>
+        <div class="card-header border-0 d-flex justify-content-center">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="currentObjects = currentHistory.interactions"
+          >
+            Interaction
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="currentObjects = currentHistory.purchases"
+          >
+            Purchases</button
+          ><button
+            type="button"
+            class="btn btn-primary"
+            (click)="currentObjects = currentHistory.coordinates"
+          >
+            Coordinates</button
+          ><button
+            type="button"
+            class="btn btn-primary"
+            (click)="
+              currentObjects = [];
+              currentObjects.push(currentHistory.recommendation)
+            "
+          >
+            Recommendation
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="generateRecommendation(currentHistory)"
+          >
+            Generate recommendation
+          </button>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="currentObjects.length > 0">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">id</th>
-                <th scope="col">url</th>
-                <th scope="col">title</th>
-                <th scope="col">time</th>
+                <th *ngFor="let key of getKeys(currentObjects[0])" scope="col">
+                  {{ key }}
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let interaction of currentHistory.interactions">
-                <td class="fixed-width">{{ interaction.id }}</td>
-                <td class="fixed-width">{{ interaction.url }}</td>
-                <td class="fixed-width">{{ interaction.title }}</td>
-                <td class="fixed-width">{{ interaction.time }}</td>
+              <tr *ngFor="let object of currentObjects">
+                <td *ngFor="let key of getKeys(object)" class="fixed-width">
+                  {{ object[key] }}
+                </td>
               </tr>
+              <!-- Recommendation -->
             </tbody>
           </table>
         </div>

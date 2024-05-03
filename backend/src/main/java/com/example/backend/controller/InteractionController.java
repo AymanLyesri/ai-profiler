@@ -1,8 +1,11 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.History;
 import com.example.backend.model.Interaction;
+import com.example.backend.model.Recommendation;
 import com.example.backend.model.Response;
 import com.example.backend.repository.InteractionRepository;
+import com.example.backend.repository.RecommendationRepository;
 import com.example.backend.service.AiService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +18,11 @@ import java.util.concurrent.CompletableFuture;
 @RestController
 public class InteractionController {
     private final InteractionRepository interactionRepository;
+    private final RecommendationRepository recommendationRepository;
 
-    public InteractionController(InteractionRepository interactionRepository) {
+    public InteractionController(InteractionRepository interactionRepository, RecommendationRepository recommendationRepository) {
         this.interactionRepository = interactionRepository;
+        this.recommendationRepository = recommendationRepository;
     }
 
     @PostMapping("/interaction/recommendation")
@@ -42,8 +47,17 @@ public class InteractionController {
         return resultFuture.thenApply(content -> {
             // Remove backslashes from the content
             String cleanedContent = content.replace("\\", "");
+
+            // Create a new history object
+            History history = new History();
+            history.setId(historyId);
+            // Save the recommendation to the database
+            Recommendation recommendation = new Recommendation();
+            recommendation.setRecommendation(cleanedContent);
+            recommendation.setHistory(history);
+            recommendationRepository.save(recommendation);
             // Create and return the Response object
-            return new Response(200, cleanedContent);
+            return new Response(200, recommendation);
         });
     }
 

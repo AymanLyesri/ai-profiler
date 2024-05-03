@@ -7,6 +7,7 @@ public class Recommendation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String recommendation;
     @OneToOne(mappedBy = "recommendation")
     private Rating rating;
     @OneToOne
@@ -19,7 +20,15 @@ public class Recommendation {
     public void setId(int id) {
         this.id = id;
     }
-    
+
+    public String getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(String recommendation) {
+        this.recommendation = recommendation;
+    }
+
     public Rating getRating() {
         return rating;
     }

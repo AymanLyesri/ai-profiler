@@ -17,10 +17,18 @@ public class History {
     private List<Purchase> purchases;
     @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
     private List<Coordinate> coordinates;
-    @OneToOne(mappedBy = "history")
+    @OneToOne(mappedBy = "history", cascade = CascadeType.ALL)
     private Recommendation recommendation;
     @ManyToOne
     private User user;
+
+    public Recommendation getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(Recommendation recommendation) {
+        this.recommendation = recommendation;
+    }
 
     public void setUser(User user) {
         this.user = user;
