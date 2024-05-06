@@ -32,7 +32,7 @@ public class InteractionController {
         List<Interaction> interactions = interactionRepository.findByHistoryId(historyId);
         interactions = interactions.subList(0, Math.min(interactions.size(), 10));
 
-        StringBuilder data = new StringBuilder("Generate a recommendation based on the links provided:\n");
+        StringBuilder data = new StringBuilder("Generate a recommendation for new links and topics based on the links provided:\n");
 
         System.out.println("Interactions: " + interactions.toArray().length);
         for (Interaction interaction : interactions) {
