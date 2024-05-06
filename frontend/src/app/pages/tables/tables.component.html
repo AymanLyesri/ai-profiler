@@ -257,6 +257,7 @@
             Recommendation
           </button>
           <button
+            *ngIf="!currentHistory.recommendation"
             type="button"
             class="btn btn-success"
             (click)="generateRecommendation(currentHistory)"
