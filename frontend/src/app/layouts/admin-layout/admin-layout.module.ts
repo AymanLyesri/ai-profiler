@@ -13,6 +13,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UploadComponent } from 'src/app/pages/upload/upload.component';
+import { CardsComponent } from 'src/app/pages/cards/cards';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { UploadComponent } from 'src/app/pages/upload/upload.component';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    UploadComponent
+    UploadComponent,
+    CardsComponent
   ]
 })
 
