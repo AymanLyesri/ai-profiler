@@ -113,6 +113,9 @@
       </div>
     </div>
   </div>
+  <h1 class="my-4 w-100" style="text-align: center" *ngIf="currentHistory">
+    History {{ currentHistory.id }}
+  </h1>
   <!-- Table -->
   <div class="row" *ngIf="currentHistory">
     <div class="col">
@@ -155,6 +158,13 @@
             (click)="generateRecommendation(currentHistory)"
           >
             Generate recommendation
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteHistory(currentHistory.id)"
+          >
+            Delete history
           </button>
         </div>
         <div class="table-responsive" *ngIf="currentObjects.length > 0">

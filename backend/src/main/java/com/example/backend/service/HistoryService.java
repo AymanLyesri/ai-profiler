@@ -42,4 +42,9 @@ public class HistoryService {
         // Save the history entity
         historyRepository.save(history);
     }
+
+    public void deleteHistory(int historyId) {
+        // Delete history from database
+        historyRepository.deleteById((long) historyId);
+    }
 }

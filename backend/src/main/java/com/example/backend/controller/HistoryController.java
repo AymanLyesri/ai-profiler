@@ -38,4 +38,14 @@ public class HistoryController {
         public History history;
 
     }
+
+    // DELETE history, accepts history id and deletes it
+    @PostMapping("/history/delete")
+    public Response deleteHistory(@RequestBody int historyId) {
+        // Delete history from database
+        historyService.deleteHistory(historyId);
+        return new Response(200, "History deleted successfully");
+    }
+
+
 }

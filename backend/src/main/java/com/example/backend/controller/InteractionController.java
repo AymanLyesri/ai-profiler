@@ -48,6 +48,8 @@ public class InteractionController {
             // Remove backslashes from the content
             String cleanedContent = content.replace("\\", "");
 
+            System.out.println(cleanedContent);
+
             // Create a new history object
             History history = new History();
             history.setId(historyId);
