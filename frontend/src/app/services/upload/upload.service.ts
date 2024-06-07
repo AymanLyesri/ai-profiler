@@ -27,10 +27,12 @@ export class UploadService
       (response) =>
       {
         console.log(response);
+        alert('History uploaded successfully');
       },
       (error) =>
       {
         console.error(error);
+        alert('Error uploading history');
       }
     );
   }

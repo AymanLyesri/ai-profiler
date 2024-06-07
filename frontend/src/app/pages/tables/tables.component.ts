@@ -38,6 +38,7 @@ export class TablesComponent implements OnInit
     {
       console.log(response);
       this.currentHistory.recommendation = response.data;
+      alert('Recommendation generated successfully');
 
     })
   }
